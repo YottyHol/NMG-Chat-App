@@ -1,7 +1,7 @@
 "use client";
 
 import type { ChatInputProps } from "@/features/chat/types";
-import type { KeyboardEvent } from "react";
+import { useEffect, useRef, type KeyboardEvent } from "react";
 
 export function ChatInput({
   value,
@@ -10,12 +10,23 @@ export function ChatInput({
   onSend,
 }: ChatInputProps) {
   const isSendDisabled = disabled || value.trim().length === 0;
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (!disabled) textareaRef.current?.focus();
+  }, [disabled]);
+
+  const sendAndKeepFocus = () => {
+    if (isSendDisabled) return;
+    onSend();
+    requestAnimationFrame(() => textareaRef.current?.focus());
+  };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       if (!isSendDisabled) {
-        onSend();
+        sendAndKeepFocus();
       }
     }
   };
@@ -24,6 +35,7 @@ export function ChatInput({
     <div className="mt-4 border-t border-gray-200 pt-4">
       <div className="flex items-end gap-2">
         <textarea
+          ref={textareaRef}
           value={value}
           onChange={(event) => onChange(event.target.value)}
           onKeyDown={handleKeyDown}
@@ -35,7 +47,7 @@ export function ChatInput({
 
         <button
           type="button"
-          onClick={onSend}
+          onClick={sendAndKeepFocus}
           disabled={isSendDisabled}
           className="h-11 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300"
         >
