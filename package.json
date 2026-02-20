@@ -11,16 +11,19 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.2.0",
     "next": "^16.1.6",
+    "postcss": "^8.5.6",
     "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react-dom": "^19.2.4",
+    "tailwindcss": "^4.2.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "typescript": "^5.7.0",
     "eslint": "^9.18.0",
-    "eslint-config-next": "^16.1.6"
+    "eslint-config-next": "^16.1.6",
+    "typescript": "^5.7.0"
   }
 }
