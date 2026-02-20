@@ -1,4 +1,7 @@
-import { MessageList } from '@/features/chat';
+ 'use client';
+
+import { useState } from 'react';
+import { ChatInput, MessageList } from '@/features/chat';
 import type { Message } from '@/types/chat';
 
 const demoMessages: Message[] = [
@@ -23,6 +26,12 @@ const demoMessages: Message[] = [
 ];
 
 export default function Home() {
+  const [draftMessage, setDraftMessage] = useState('');
+
+  const handleSend = () => {
+    setDraftMessage('');
+  };
+
   return (
     <main className="mx-auto max-w-3xl px-6 py-10">
       <h1 className="text-2xl font-semibold text-gray-900">AI Chat Interface</h1>
@@ -32,6 +41,11 @@ export default function Home() {
 
       <section className="mt-6 rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
         <MessageList messages={demoMessages} />
+        <ChatInput
+          value={draftMessage}
+          onChange={setDraftMessage}
+          onSend={handleSend}
+        />
       </section>
     </main>
   );

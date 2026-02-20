@@ -7,3 +7,10 @@ export interface MessageProps {
 export interface MessageListProps {
   messages: Message[];
 }
+
+export interface ChatInputProps {
+  value: string;
+  disabled?: boolean;
+  onChange: (value: string) => void;
+  onSend: () => void;
+}
