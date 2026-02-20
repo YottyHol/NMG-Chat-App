@@ -1,38 +1,37 @@
+import { MessageList } from '@/features/chat';
+import type { Message } from '@/types/chat';
+
+const demoMessages: Message[] = [
+  {
+    id: 'msg_1',
+    role: 'assistant',
+    content: 'Hi! Ask me anything and I can help.',
+    timestamp: new Date().toISOString(),
+  },
+  {
+    id: 'msg_2',
+    role: 'user',
+    content: 'Can you explain how this chat UI is structured?',
+    timestamp: new Date().toISOString(),
+  },
+  {
+    id: 'msg_3',
+    role: 'assistant',
+    content: 'Sure. We are rendering a feature-level MessageList component on the home page.',
+    timestamp: new Date().toISOString(),
+  },
+];
+
 export default function Home() {
   return (
-    <main style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
-      <h1>AI Chat Interface - Take Home Assignment</h1>
-      
-      <section style={{ marginTop: '2rem' }}>
-        <h2>Getting Started</h2>
-        <p>
-          This is your starter repository. The mock API endpoints are already 
-          set up for you. Your task is to build a chat interface that integrates 
-          with these endpoints.
-        </p>
-        
-        <h3 style={{ marginTop: '1.5rem' }}>Available API Endpoints:</h3>
-        <ul>
-          <li>
-            <code>POST /api/chat</code> - Standard chat endpoint with simulated delay
-          </li>
-          <li>
-            <code>POST /api/chat/stream</code> - Streaming endpoint (bonus feature)
-          </li>
-        </ul>
-        
-        <h3 style={{ marginTop: '1.5rem' }}>What to Build:</h3>
-        <p>Please refer to the README.md for complete requirements and evaluation criteria.</p>
-      </section>
-      
-      <section style={{ 
-        marginTop: '2rem', 
-        padding: '1rem', 
-        backgroundColor: '#f5f5f5',
-        borderRadius: '4px' 
-      }}>
-        <strong>Note:</strong> You can delete this page and start fresh, or build 
-        upon it. The choice is yours!
+    <main className="mx-auto max-w-3xl px-6 py-10">
+      <h1 className="text-2xl font-semibold text-gray-900">AI Chat Interface</h1>
+      <p className="mt-2 text-sm text-gray-600">
+        This is the initial chat message list rendered from the features folder.
+      </p>
+
+      <section className="mt-6 rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
+        <MessageList messages={demoMessages} />
       </section>
     </main>
   );
