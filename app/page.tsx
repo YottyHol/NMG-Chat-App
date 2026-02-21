@@ -1,7 +1,8 @@
 "use client";
+
 import { ChatInput, MessageList } from "@/features/chat";
 import type { Message } from "@/types/chat";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 const DEMO_MESSAGE_COUNT = 50;
 
@@ -30,11 +31,64 @@ const demoMessages: Message[] = Array.from(
 );
 
 export default function Home() {
+  const [messages, setMessages] = useState<Message[]>([]);
   const [draftMessage, setDraftMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [conversationId, setConversationId] = useState<string | undefined>();
 
-  const handleSend = () => {
+  const handleSend = useCallback(async () => {
+    const text = draftMessage.trim();
+    if (!text || isLoading) return;
+
+    const userMessage: Message = {
+      id: `user_${Date.now()}`,
+      role: "user",
+      content: text,
+      timestamp: new Date().toISOString(),
+    };
+
     setDraftMessage("");
-  };
+    setMessages((prev) => [...prev, userMessage]);
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: text,
+          conversationId: conversationId ?? undefined,
+        }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error ?? "Request failed");
+      }
+
+      if (data.conversationId && !conversationId) {
+        setConversationId(data.conversationId);
+      }
+
+      const assistantMessage: Message = {
+        id: data.id,
+        role: "assistant",
+        content: data.content,
+        timestamp: data.timestamp,
+      };
+      setMessages((prev) => [...prev, assistantMessage]);
+    } catch (err) {
+      const errorMessage: Message = {
+        id: `err_${Date.now()}`,
+        role: "assistant",
+        content: err instanceof Error ? err.message : "Something went wrong.",
+        timestamp: new Date().toISOString(),
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [draftMessage, isLoading, conversationId]);
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-10">
@@ -42,13 +96,14 @@ export default function Home() {
         AI Chat Interface
       </h1>
       <p className="mt-2 text-sm text-gray-600">
-        This is the initial chat message list rendered from the features folder.
+        Send a message to talk to the mock assistant.
       </p>
 
       <section className="mt-6 rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-        <MessageList messages={demoMessages} />
+        <MessageList messages={messages} />
         <ChatInput
           value={draftMessage}
+          disabled={isLoading}
           onChange={setDraftMessage}
           onSend={handleSend}
         />
