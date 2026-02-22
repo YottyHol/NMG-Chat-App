@@ -4,33 +4,6 @@ import { ChatInput, MessageList } from "@/features/chat";
 import type { Message } from "@/types/chat";
 import { useCallback, useState } from "react";
 
-// // Keep for later testing ui
-// const DEMO_MESSAGE_COUNT = 50;
-
-// const loremSnippets = [
-//   "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-//   "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-//   "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-//   "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-//   "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-// ];
-
-// const demoMessages: Message[] = Array.from(
-//   { length: DEMO_MESSAGE_COUNT },
-//   (_, index) => {
-//     const messageNumber = index + 1;
-//     const role = index % 2 === 0 ? "assistant" : "user";
-//     const content = loremSnippets[index % loremSnippets.length];
-
-//     return {
-//       id: `msg_${messageNumber}`,
-//       role,
-//       content,
-//       timestamp: new Date().toISOString(),
-//     };
-//   },
-// );
-
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [draftMessage, setDraftMessage] = useState("");
@@ -118,12 +91,14 @@ export default function Home() {
       <p className="mt-1.5 text-xs text-gray-600 sm:mt-2 sm:text-sm">
         Send a message to talk to the mock assistant.
       </p>
-
+      {/* I want history messages to scroll behind the send box so the focus makes more sense */}
       <section
         className="mt-4 rounded-lg border border-gray-200 bg-white p-3 shadow-sm sm:mt-6 sm:rounded-xl sm:p-4"
         aria-label="Chat conversation"
       >
         <MessageList messages={messages} onRetry={handleRetry} />
+      </section>
+      <section>
         <ChatInput
           value={draftMessage}
           disabled={isLoading}

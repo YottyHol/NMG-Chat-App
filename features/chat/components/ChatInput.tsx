@@ -37,7 +37,7 @@ export function ChatInput({
       role="form"
       aria-label="Compose message"
     >
-      <div className="flex items-end gap-1.5 sm:gap-2">
+      <div className="flex items-stretch gap-1.5 sm:gap-2">
         <textarea
           ref={textareaRef}
           value={value}
@@ -59,7 +59,7 @@ export function ChatInput({
           onClick={sendAndKeepFocus}
           disabled={isSendDisabled}
           aria-label="Send message"
-          className="h-10 rounded-lg bg-blue-600 px-3 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300 sm:h-11 sm:px-4"
+          className="rounded-lg bg-blue-600 px-3 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300 sm:px-4"
         >
           Send
         </button>
