@@ -2,7 +2,7 @@
 
 ## Approach
 
-Firstly I set up the project and library, gitignore, prettier and tailwind then created the architectural structure to work with, which meant creating a feature space for the components and breaking out the logic into those components, this means any business logic can handled at the top level, currently this is just the main page but could be split into a service or a hook.
+Firstly I set up the project and library, gitignore, prettier and tailwind then created the architectural structure to work with, which meant creating a feature space for the components and breaking out the logic into those components, this means any business logic can be handled at the top level, currently this is just the main page but could be split into a service or a hook.
 
 I then did a bit of playtesting of design and accessiblity by using the app myself and adding different numbers of messages can be seen here: https://github.com/YottyHol/NMG-Chat-App/commit/5fb06c3018dcbfb37f87c7247cccb1075facf424.
 
