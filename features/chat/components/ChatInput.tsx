@@ -33,11 +33,11 @@ export function ChatInput({
 
   return (
     <div
-      className="mt-4 border-t border-gray-200 pt-4"
+      className="mt-3 border-t border-gray-200 pt-3 sm:mt-4 sm:pt-4"
       role="form"
       aria-label="Compose message"
     >
-      <div className="flex items-end gap-2">
+      <div className="flex items-end gap-1.5 sm:gap-2">
         <textarea
           ref={textareaRef}
           value={value}
@@ -48,7 +48,7 @@ export function ChatInput({
           disabled={disabled}
           aria-label="Message input"
           aria-describedby="message-hint"
-          className="min-h-[44px] flex-1 resize-y rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200 disabled:cursor-not-allowed disabled:bg-gray-100"
+          className="min-h-[40px] flex-1 resize-y rounded-lg border border-gray-300 bg-white px-2.5 py-1.5 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200 disabled:cursor-not-allowed disabled:bg-gray-100 sm:min-h-[44px] sm:px-3 sm:py-2"
         />
         <span id="message-hint" className="sr-only">
           Press Enter to send, Shift+Enter for new line.
@@ -59,7 +59,7 @@ export function ChatInput({
           onClick={sendAndKeepFocus}
           disabled={isSendDisabled}
           aria-label="Send message"
-          className="h-11 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300"
+          className="h-10 rounded-lg bg-blue-600 px-3 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300 sm:h-11 sm:px-4"
         >
           Send
         </button>

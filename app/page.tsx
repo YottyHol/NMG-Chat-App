@@ -109,18 +109,18 @@ export default function Home() {
 
   return (
     <main
-      className="mx-auto max-w-3xl px-6 py-10"
+      className="mx-auto max-w-3xl px-3 py-5 sm:px-6 sm:py-10"
       aria-label="AI Chat Interface"
     >
-      <h1 className="text-2xl font-semibold text-gray-900">
+      <h1 className="text-xl font-semibold text-gray-900 sm:text-2xl">
         AI Chat Interface
       </h1>
-      <p className="mt-2 text-sm text-gray-600">
+      <p className="mt-1.5 text-xs text-gray-600 sm:mt-2 sm:text-sm">
         Send a message to talk to the mock assistant.
       </p>
 
       <section
-        className="mt-6 rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
+        className="mt-4 rounded-lg border border-gray-200 bg-white p-3 shadow-sm sm:mt-6 sm:rounded-xl sm:p-4"
         aria-label="Chat conversation"
       >
         <MessageList messages={messages} onRetry={handleRetry} />
