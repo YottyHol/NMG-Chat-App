@@ -3,6 +3,10 @@ export interface Message {
   role: 'user' | 'assistant';
   content: string;
   timestamp: string;
+  /** When true, message is an error and can show retry UI */
+  isError?: boolean;
+  /** If set, retry button will resend this content */
+  retryContent?: string;
 }
 
 export interface ChatRequest {
